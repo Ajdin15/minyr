@@ -5,7 +5,7 @@ import (
 	"log"
 	"io"
 	"strings"
-	"github.com/Ajdin15/misc/conv"
+	"github.com/Ajdin15/funtemps/conv"
 )	
 
 func main() {
