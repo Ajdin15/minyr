@@ -5,7 +5,7 @@ import (
 	"strconv"
 	//"strings"
 	//"errors"
-	"github.com/uia-worker/misc/conv"
+	"github.com/Ajdin15/misc/conv"
 )
 
 func CelsiusToFahrenheitString(celsius string) (string, error) {

@@ -5,12 +5,12 @@ import (
 	"log"
 	"io"
 	"strings"
-	"github.com/uia-worker/misc/conv"
+	"github.com/Ajdin15/misc/conv"
 )	
 
 func main() {
 	src, err := os.Open("table.csv")
-	//src, err := os.Open("/home/janisg/minyr/kjevik-temp-celsius-20220318-20230318.csv")
+	//src, err := os.Open("/home/ajdins/minyr/kjevik-temp-celsius-20220318-20230318.csv")
 	if err != nil {
         	log.Fatal(err)
 	}
