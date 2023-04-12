@@ -13,7 +13,7 @@ import (
 	kan du bruke malen som den er (du må selvsagt endre
 	funksjonsnavn og testverdier)
 */
-func TestCelsiusToFahrenheit(t *testing.T) {
+func TestCelsiusToFarhenheit(t *testing.T) {
 	type test struct {
 		input float64
 		want  float64
@@ -24,13 +24,13 @@ func TestCelsiusToFahrenheit(t *testing.T) {
 	}
 
 	for _, tc := range tests {
-		got := CelsiusToFahrenheit(tc.input)
+		got := CelsiusToFarhenheit(tc.input)
 		if !reflect.DeepEqual(tc.want, got) {
 			t.Errorf("expected: %v, got: %v", tc.want, got)
 		}
 	}
 }
-func TestFahrenheitToCelsius(t *testing.T) {
+func TestFarhenheitToCelsius(t *testing.T) {
 	type test struct {
 		input float64
 		want  float64
@@ -41,7 +41,7 @@ func TestFahrenheitToCelsius(t *testing.T) {
 	}
 
 	for _, tc := range tests {
-		got := FahrenheitToCelsius(tc.input)
+		got := FarhenheitToCelsius(tc.input)
 		if !withinTolerance(tc.want, got, 1e-12) {
 			t.Errorf("expected: %v, got: %v", tc.want, got)
 		}
@@ -49,7 +49,7 @@ func TestFahrenheitToCelsius(t *testing.T) {
 
 }
 
-func TestFahrenheitToKelvin(t *testing.T) {
+func TestFarhenheitToKelvin(t *testing.T) {
 	type test struct {
 		input float64
 		want  float64
@@ -60,7 +60,7 @@ func TestFahrenheitToKelvin(t *testing.T) {
 	}
 
 	for _, tc := range tests {
-		got := FahrenheitToKelvin(tc.input)
+		got := FarhenheitToKelvin(tc.input)
 		if !withinTolerance(tc.want, got, 1e-12) {
 			t.Errorf("expected: %v, got: %v", tc.want, got)
 		}
@@ -101,7 +101,7 @@ func TestKelvinToCelsius(t *testing.T) {
 		}
 	}
 }
-func TestKelvinToFahrenheit(t *testing.T) {
+func TestKelvinToFarhenheit(t *testing.T) {
 	type test struct {
 		input float64
 		want  float64
@@ -112,7 +112,7 @@ func TestKelvinToFahrenheit(t *testing.T) {
 	}
 
 	for _, tc := range tests {
-		got := KelvinToFahrenheit(tc.input)
+		got := KelvinToFarhenheit(tc.input)
 		if !withinTolerance(tc.want, got, 1e-12) {
 			t.Errorf("expected: %v, got: %v", tc.want, got)
 		}

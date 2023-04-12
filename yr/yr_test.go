@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestCelsiusToFahrenheitString(t *testing.T) {
+func TestCelsiusToFarhenheitString(t *testing.T) {
      type test struct {
 	input string
 	want string
@@ -15,7 +15,7 @@ func TestCelsiusToFahrenheitString(t *testing.T) {
      }
 
      for _, tc := range tests {
-	     got, _ := CelsiusToFahrenheitString(tc.input)
+	     got, _ := CelsiusToFarhenheitString(tc.input)
 	     if !(tc.want == got) {
 		     t.Errorf("expected %s, got: %s", tc.want, got)
 	     }
@@ -25,7 +25,7 @@ func TestCelsiusToFahrenheitString(t *testing.T) {
 // Forutsetter at vi kjenner strukturen i filen og denne implementasjon 
 // er kun for filer som inneholder linjer hvor det fjerde element
 // på linjen er verdien for temperatrmaaling i grader celsius
-func TestCelsiusToFahrenheitLine(t *testing.T) {
+func TestCelsiusToFarhenheitLine(t *testing.T) {
      type test struct {
 	input string
 	want string
@@ -37,7 +37,7 @@ func TestCelsiusToFahrenheitLine(t *testing.T) {
      }
 
      for _, tc := range tests {
-	     got, _ := CelsiusToFahrenheitLine(tc.input)
+	     got, _ := CelsiusToFarhenheitLine(tc.input)
 	     if !(tc.want == got) {
 		     t.Errorf("expected %s, got: %s", tc.want, got)
 	     }
