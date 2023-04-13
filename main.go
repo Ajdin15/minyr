@@ -7,6 +7,10 @@ import (
     "log"
     "os"
     "strings"
+    "strconv"
+    "bufio"
+        
+    
 )
 
 func main() {
@@ -27,7 +31,6 @@ func main() {
         if err != nil && err != io.EOF {
             log.Fatal(err)
         }
-    
 
         bytesCount++
         //log.Printf("%c ", buffer[:n])
@@ -37,7 +40,7 @@ func main() {
             elementArray := strings.Split(string(linebuf), ";")
             if len(elementArray) > 3 {
                 celsius := elementArray[3]
-                var fahr = conv.CelsiusToFarhenheit(celsius)
+                var fahr = CelsiusToFarhenheitString(celsius)
                 log.Println(elementArray[3])
                 fmt.Println(fahr)
             }
@@ -49,6 +52,39 @@ func main() {
         if err == io.EOF {
             break
         }
+var input string
+scanner := bufio.NewScanner(os.Stdin)
+
+for scanner.Scan() {
+    input = scanner.Text()
+    if input == "q" || input == "exit" {
+        fmt.Println("exit")
+        os.Exit(0)
+    } else if input == "convert" {
+        fmt.Println("Konverterer alle målingene gitt i grader Celsius til grader Fahrenheit.")
+        // funksjon som åpner fil, leser linjer, gjør endringer og lagrer nye linjer i en ny fil
+
+    // flere else-if setninger     
+    } else {
+        fmt.Println("Venligst velg convert, average eller exit:")
+
     }
 
 }
+
+    }
+}
+
+func CelsiusToFarhenheitString(celsius string)  string { 
+	var fahrFloat float64
+      	if celsiusFloat, err := strconv.ParseFloat(celsius, 64); err == nil {
+		fahrFloat = conv.CelsiusToFarhenheit(celsiusFloat)
+	}
+	fahrString := fmt.Sprintf("%.1f", fahrFloat)
+	return fahrString 
+}
+    
+
+
+
+
