@@ -9,6 +9,10 @@ import (
     "strings"
     "strconv"
     "bufio"
+    "encoding/csv"
+    
+   
+    
         
     
 )
@@ -69,6 +73,20 @@ for scanner.Scan() {
         fmt.Println("Venligst velg convert, average eller exit:")
 
     }
+  fd, error := os.Open("kjevik-temp-celsius-20220318-20230318.csv")
+  if error != nil {
+    fmt.Println(error)
+  }
+  fmt.Println("Successfully opened the CSV file")
+  defer fd.Close()
+    
+  // read CSV file
+  fileReader := csv.NewReader(fd)
+  records, error := fileReader.ReadAll()
+  if error != nil {
+      fmt.Println(error)
+  }
+  fmt.Println(records)
 
 }
 
