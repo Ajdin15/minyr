@@ -89,9 +89,28 @@ for scanner.Scan() {
   fmt.Println(records)
 
 }
-
+//f _, err := os.Stat("kjevik-temp-fahr-20220318-20230318.csv"); err == nil {
+    fmt.Print("Filen kjevik-temp-fahr-20220318-20230318.csv finnes allerede. Vil du generere den på nytt? (j/n):")
+    scanner.Scan()
+    answer := strings.ToLower(scanner.Text())
+    if answer != "j" && answer != "n" {
+        log.Fatal("Ugyldig svar")
+    } else if answer == "n" {
+        return
     }
 }
+ 
+convertedTemperatures, err := ConvertTemperatures()
+if err != nil {
+    log.Fatal(err)
+}
+
+if err := WriteLines(convertedTemperatures, "kjevik-temp-fahr-20220318-20230318.csv"); err != nil {
+    log.Fatal(err)
+}
+
+    }
+
 
 func CelsiusToFarhenheitString(celsius string)  string { 
 	var fahrFloat float64
@@ -100,6 +119,69 @@ func CelsiusToFarhenheitString(celsius string)  string {
 	}
 	fahrString := fmt.Sprintf("%.1f", fahrFloat)
 	return fahrString 
+}
+
+func WriteLines(lines []string, filename string) error {
+file, err := os.Create(filename)
+if err != nil {
+return err
+}
+
+writer := bufio.NewWriter(file)
+defer writer.Flush()
+
+fmt.Fprintln(writer, "Navn;Stasjon;Tid(norsk normaltid);Lufttemperatur (F)")
+
+for _, line := range lines {
+    fmt.Fprintln(writer, line)
+}
+
+fmt.Fprint(writer, "Data er basert på gyldig data (per 18.03.2023) (CC BY 4.0) fra Meteorologisk institutt (MET);endringen er gjort av Ajdin Smajic")
+
+return nil
+}
+
+func ConvertTemperatures() ([]string, error) {
+file, err := os.Open("kjevik-temp-celsius-20220318-20230318.csv")
+if err != nil {
+return nil, err
+}
+
+scanner := bufio.NewScanner(file)
+
+ConvertedTemperatures := make([]string, 0)
+for i := 0; scanner.Scan(); i++ {
+    line := scanner.Text()
+
+    if i == 0 {
+        continue
+    }
+
+    fields := strings.Split(line, ";")
+    if len(fields) != 4 {
+        return nil, fmt.Errorf("uventet antall felt i linje %d: %d", i, len(fields))
+    }
+
+    if fields[3] == "" {
+        continue
+    }
+
+    TemperatureCelsius, err := strconv.ParseFloat(fields[3], 64)
+
+    if err != nil {
+        return nil, fmt.Errorf("kunne ikke parse temperatur i linje %d: %s", i, err)
+    }
+    TemperatureFarhenheit := conv.CelsiusToFarhenheit(TemperatureCelsius)
+
+    ConvertedTemperature := fmt.Sprintf("%s;%s;%.2fF", fields[0], strings.Join(fields[1:3], ";"), TemperatureFarhenheit)
+    ConvertedTemperatures = append(ConvertedTemperatures, ConvertedTemperature)
+}
+
+if err := scanner.Err(); err != nil {
+    return nil, err
+}
+
+return ConvertedTemperatures, nil
 }
     
 
